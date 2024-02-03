@@ -1,12 +1,22 @@
-apiVersion: v1
-kind: Service
-metadata:
-  name: web-app-service
-spec:
-  selector:
+# Este arquivo YAML define um Service chamado web-app-service para expor um conjunto de Pods no Kubernetes.
+# Vamos analisar cada seção:
+
+apiVersion: v1  # Indica a versão da API Kubernetes utilizada neste recurso YAML.
+kind: Service   # Especifica que estamos definindo um Service.
+
+metadata:       # Contém informações sobre o objeto, como o nome.
+  name: web-app-service  # Define o nome do Service como web-app-service.
+
+spec:           # Contém as especificações para o Service.
+  selector:     # Define os Pods que este Service vai direcionar. Neste caso, ele seleciona todos os Pods com o rótulo app: web-app.
     app: web-app
-  ports:
-    - protocol: TCP
-      port: 80
-      targetPort: 8080
-  type: LoadBalancer
+
+  ports:        # Especifica as portas utilizadas pelo Service.
+    - protocol: TCP     # Indica o protocolo de comunicação (TCP neste caso).
+      port: 80          # Define a porta no Service que estará disponível externamente.
+      targetPort: 8080   # Mapeia a porta no Pod para a qual o tráfego será encaminhado.
+
+  type: LoadBalancer   # Define o tipo do Service como LoadBalancer, permitindo que o Kubernetes provisione automaticamente um balanceador de carga externo para encaminhar o tráfego para os Pods.
+
+# Este Service é útil quando você deseja expor um Deployment para o mundo exterior, garantindo um balanceamento de carga automático.
+# Ao aplicar este arquivo YAML no seu cluster Kubernetes, o Service web-app-service será criado e estará pronto para direcionar o tráfego para os Pods rotulados como app: web-app.
