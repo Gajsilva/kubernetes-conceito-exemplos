@@ -1,0 +1,17 @@
+# Este arquivo YAML define um Service chamado clusterip-service para permitir a comunicação interna entre os Pods no Kubernetes.
+# Vamos analisar cada seção:
+
+apiVersion: v1  # Indica a versão da API Kubernetes utilizada neste recurso YAML.
+kind: Service   # Especifica que estamos definindo um Service.
+
+metadata:       # Contém informações sobre o objeto, como o nome.
+  name: clusterip-service  # Define o nome do Service como clusterip-service.
+
+spec:           # Contém as especificações para o Service.
+  selector:     # Define os Pods que este Service vai direcionar. Neste caso, ele seleciona todos os Pods com o rótulo app: clusterip-app.
+    app: clusterip-app
+
+  ports:        # Especifica as portas utilizadas pelo Service.
+    - protocol: TCP     # Indica o protocolo de comunicação (TCP neste caso).
+      port: 8080        # Define a porta no Service.
+      targetPort: 8080   # Mapeia a porta no Pod para a qual o tráfego será encaminhado.
